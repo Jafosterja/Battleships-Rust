@@ -1,0 +1,6 @@
+[package]
+name = "Battleships-Rust"
+version = "0.1.0"
+authors = ["Jafosterja <Jafosterja@users.noreply.github.com>"]
+
+[dependencies]
