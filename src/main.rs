@@ -12,7 +12,9 @@ use ship::create_destroyer;
 
 fn main() {
     println!("Hello, world!");
-    let _player = setup_player();
+    let mut _player = setup_player();
+    draw_board(&_player);
+    _player = _player.check_cords('A', 10);
     draw_board(&_player);
 }
 pub fn setup_player() -> Player{
@@ -96,11 +98,21 @@ pub fn draw_board(player : &Player){
         }
         for k in 1..11{//columns for that row
             let cords = Cords{x : convert_int_to_char(k), y : y, hit : false};
+            let mut check_if_hit = 0;
             for ships in 0..5{
-                if player.myships[ships].check(cords) == true{
-                    print_string.push(' ');
-                    print_string.push(player.myships[ships].get_type_char());
-                    check_ships = true;
+
+                if player.myships[ships].check(cords) >= 0{
+                    check_if_hit = player.myships[ships].check(cords);
+                    if player.myships[ships].cordinates[check_if_hit as usize].hit == true{
+                        print_string.push(' ');
+                        print_string.push('X');
+                        check_ships = true;
+                    }
+                    else{
+                        print_string.push(' ');
+                        print_string.push(player.myships[ships].get_type_char());
+                        check_ships = true;
+                    }
                 }
             }
             if check_ships == false{

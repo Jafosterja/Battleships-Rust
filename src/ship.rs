@@ -65,13 +65,13 @@ impl Ship{
     pub fn get_type(&self) -> &String{
         return &self.shiptype;
     }
-    pub fn check(&self, test : Cords) -> bool{
+    pub fn check(&self, test : Cords) -> isize{
         for range in 0..5{
              if test.x == self.cordinates[range].x && test.y == self.cordinates[range].y {
-                return true;
+                return range as isize;
              }
         }
-        return false
+        return -1
     }
     pub fn get_type_char(&self) -> char{
         match self.shiptype.as_ref(){
