@@ -52,7 +52,8 @@ impl Player{
         for x in 0..5{//Index for ships in player struct
             for y in 0..5{//index for cords for the ship passed in
                 for j in 0..5{//index for cords in each ship for the player class
-                    if ship.cordinates[y].x == self.myships[x].cordinates[j].x && ship.cordinates[y].y == self.myships[x].cordinates[j].y{
+                    if ship.cordinates[y].x == self.myships[x].cordinates[j].x && ship.cordinates[y].y == self.myships[x].cordinates[j].y && self.myships[x].cordinates[j].y != 0{
+                        println!("New ship: {}, {} old ship: {}. {}",ship.cordinates[y].x,ship.cordinates[y].y, self.myships[x].cordinates[j].x,self.myships[x].cordinates[j].y );
                         return false;
                     }
                 }

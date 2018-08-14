@@ -28,6 +28,7 @@ pub fn setup_player() -> Player{
              println!("Ship creation failed coordinates overlap with already existing ship");
          }
     }
+    draw_board(&player);
     loop{
          let bs = create_battleship();
          let test = player.check_if_ship_fits(&bs);
@@ -39,6 +40,7 @@ pub fn setup_player() -> Player{
              println!("Ship creation failed coordinates overlap with already existing ship");
          }
     }
+    draw_board(&player);
     loop{
          let cruiser = create_cruiser();
          let test = player.check_if_ship_fits(&cruiser);
@@ -50,6 +52,7 @@ pub fn setup_player() -> Player{
              println!("Ship creation failed coordinates overlap with already existing ship");
          }
     }
+    draw_board(&player);
     loop{
          let sub = create_submarine();
          let test = player.check_if_ship_fits(&sub);
@@ -61,6 +64,7 @@ pub fn setup_player() -> Player{
              println!("Ship creation failed coordinates overlap with already existing ship");
          }
     }
+    draw_board(&player);
     loop{
          let dest = create_destroyer();
          let test = player.check_if_ship_fits(&dest);
@@ -76,12 +80,20 @@ pub fn setup_player() -> Player{
 }
 pub fn draw_board(player : &Player){
     //Header
-    println!("  A B C D E F G H I J", );
+    println!("   A B C D E F G H I J", );
 
     let mut print_string = "".to_string();
     let mut check_ships = false;
     for y in 1..11{//rows
-        print_string += &y.to_string();//initial char
+        if(y == 10)
+        {
+            print_string += &y.to_string();
+        }
+        else
+        {
+            print_string += &y.to_string();//initial char
+            print_string.push(' ');
+        }
         for k in 1..11{//columns for that row
             let cords = Cords{x : convert_int_to_char(k), y : y, hit : false};
             for ships in 0..5{
