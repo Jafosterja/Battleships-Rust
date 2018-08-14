@@ -6,6 +6,7 @@ pub struct Player{
     pub myships : [Ship; 5],
     pub alive : bool,
     pub a_ships : i8,
+    pub index : usize
 
 }
 pub fn check_if_alive(player : Player) -> bool{
@@ -18,6 +19,16 @@ pub fn check_if_alive(player : Player) -> bool{
         }
     }
     return result;
+}
+impl Default for Player {
+    fn default() -> Player {
+        Player {
+            myships : [Default::default(),Default::default(),Default::default(),Default::default(),Default::default()],
+            alive : true,
+            a_ships : 5,
+            index : 0,
+        }
+    }
 }
 impl Player{
     pub fn check_status(&self) -> bool{
@@ -37,4 +48,22 @@ impl Player{
         self.alive = check_if_alive(self_clone);
         return self
     }
+    pub fn check_if_ship_fits(&self, ship : &Ship) -> bool{
+        for x in 0..5{//Index for ships in player struct
+            for y in 0..5{//index for cords for the ship passed in
+                for j in 0..5{//index for cords in each ship for the player class
+                    if ship.cordinates[y].x == self.myships[x].cordinates[j].x && ship.cordinates[y].y == self.myships[x].cordinates[j].y{
+                        return false;
+                    }
+                }
+            }    
+        }
+        return true;
+    }
+    pub fn add_ship(mut self, ship : Ship) -> Player{
+        self.myships[self.index] = ship;
+        self.index = self.index + 1;
+        return self;
+    }
 }
+

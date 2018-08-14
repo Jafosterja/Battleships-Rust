@@ -23,6 +23,16 @@ pub struct Ship{
     pub index : i8,
     pub cordinates : [Cords; 5],
 }
+impl Default for Ship {
+    fn default() -> Ship {
+        Ship {
+            shiptype : "Default".to_string(),
+            status : true,
+            index : 0,
+            cordinates : [Default::default(),Default::default(),Default::default(),Default::default(),Default::default()],
+        }
+    }
+}
 impl Ship{
     pub fn check_if_hit(mut self, test : Cords) -> Ship{
         for mut p in 0..5{
@@ -95,7 +105,12 @@ pub fn create_carrier() -> Ship{
             println!("Please enter the row for the anchor point of the carrier(1-10): ");
             io::stdin().read_line(&mut inputy).expect("failed to read from stdin");//Example found on stackoverflow
             let trimmedy = inputy.trim();
+            let x = trimmedy.len();
             y_initial = trimmedy.chars().next().unwrap().to_digit(10).unwrap();
+            if y_initial == 1 && x == 2{
+                println!("You entered a value greater than or equal to 10 assuming 10");
+                y_initial = 10;
+            }
             if check_if_y_is_valid(&(y_initial as usize)){
                 break;
             }
@@ -231,6 +246,7 @@ pub fn check_setup(dir: &char, x: &char, y: &usize, size: i8) -> bool{
     if dir == &'N'{
         let test = *y as i8;
         if test - size < 1{
+            println!("{}", y);
             println!("Invalids setup");
             return false;
         }
@@ -279,7 +295,12 @@ pub fn create_battleship() -> Ship{
             println!("Please enter the row for the anchor point of the Battleship(1-10): ");
             io::stdin().read_line(&mut inputy).expect("failed to read from stdin");//Example found on stackoverflow
             let trimmedy = inputy.trim();
+            let x = trimmedy.len();
             y_initial = trimmedy.chars().next().unwrap().to_digit(10).unwrap();
+            if y_initial == 1 && x == 2{
+                println!("You entered a value greater than or equal to 10 assuming 10");
+                y_initial = 10;
+            }
             if check_if_y_is_valid(&(y_initial as usize)){
                 break;
             }
@@ -359,7 +380,12 @@ pub fn create_cruiser() -> Ship{
             println!("Please enter the row for the anchor point of the Cruiser(1-10): ");
             io::stdin().read_line(&mut inputy).expect("failed to read from stdin");//Example found on stackoverflow
             let trimmedy = inputy.trim();
+            let x = trimmedy.len();
             y_initial = trimmedy.chars().next().unwrap().to_digit(10).unwrap();
+            if y_initial == 1 && x == 2{
+                println!("You entered a value greater than or equal to 10 assuming 10");
+                y_initial = 10;
+            }
             if check_if_y_is_valid(&(y_initial as usize)){
                 break;
             }
@@ -436,7 +462,12 @@ pub fn create_submarine() -> Ship{
             println!("Please enter the row for the anchor point of the sub(1-10): ");
             io::stdin().read_line(&mut inputy).expect("failed to read from stdin");//Example found on stackoverflow
             let trimmedy = inputy.trim();
+            let x = trimmedy.len();
             y_initial = trimmedy.chars().next().unwrap().to_digit(10).unwrap();
+            if y_initial == 1 && x == 2{
+                println!("You entered a value greater than or equal to 10 assuming 10");
+                y_initial = 10;
+            }
             println!("y: {}",y_initial );
             if check_if_y_is_valid(&(y_initial as usize)){
                 break;
@@ -512,7 +543,12 @@ pub fn create_destroyer() -> Ship{
             println!("Please enter the row for the anchor point of the Destroyer(1-10): ");
             io::stdin().read_line(&mut inputy).expect("failed to read from stdin");//Example found on stackoverflow
             let trimmedy = inputy.trim();
+            let x = trimmedy.len();
             y_initial = trimmedy.chars().next().unwrap().to_digit(10).unwrap();
+            if y_initial == 1 && x == 2{
+                println!("You entered a value greater than or equal to 10 assuming 10");
+                y_initial = 10;
+            }
             if check_if_y_is_valid(&(y_initial as usize)){
                 break;
             }

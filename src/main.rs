@@ -16,13 +16,62 @@ fn main() {
     draw_board(&_player);
 }
 pub fn setup_player() -> Player{
-    let carrier = create_carrier();
-    let bs = create_battleship();
-    let cruiser = create_cruiser();
-    let sub = create_submarine();
-    let dest = create_destroyer();
-    
-    let player = Player{myships : [carrier,bs,cruiser,sub,dest], alive : true, a_ships : 5};
+    let mut player : Player = Default::default();
+    loop{
+         let carrier = create_carrier();
+         let test = player.check_if_ship_fits(&carrier);
+         if test == true{
+             player = player.add_ship(carrier);
+             break;
+         }
+         else{
+             println!("Ship creation failed coordinates overlap with already existing ship");
+         }
+    }
+    loop{
+         let bs = create_battleship();
+         let test = player.check_if_ship_fits(&bs);
+         if test == true{
+             player = player.add_ship(bs);
+             break;
+         }
+         else{
+             println!("Ship creation failed coordinates overlap with already existing ship");
+         }
+    }
+    loop{
+         let cruiser = create_cruiser();
+         let test = player.check_if_ship_fits(&cruiser);
+         if test == true{
+             player = player.add_ship(cruiser);
+             break;
+         }
+         else{
+             println!("Ship creation failed coordinates overlap with already existing ship");
+         }
+    }
+    loop{
+         let sub = create_submarine();
+         let test = player.check_if_ship_fits(&sub);
+         if test == true{
+             player = player.add_ship(sub);
+             break;
+         }
+         else{
+             println!("Ship creation failed coordinates overlap with already existing ship");
+         }
+    }
+    loop{
+         let dest = create_destroyer();
+         let test = player.check_if_ship_fits(&dest);
+         if test == true{
+             player = player.add_ship(dest);
+             break;
+         }
+         else{
+             println!("Ship creation failed coordinates overlap with already existing ship");
+         }
+    }
     return player;
 }
 pub fn draw_board(player : &Player){
