@@ -17,11 +17,11 @@ impl Default for Cords {
 }
 #[derive(Clone)]
 pub struct Ship{
-    pub shiptype : String,
+    pub shiptype : String,//the type of the ship
     //pub coordinates: Vec<Cords>,
-    pub status : bool,
-    pub index : i8,
-    pub cordinates : [Cords; 5],
+    pub status : bool,//status of ship(True = alive, false = dead)
+    pub index : i8,//number of cords currently created
+    pub cordinates : [Cords; 5],//The cords this ship spans
 }
 impl Default for Ship {
     fn default() -> Ship {
@@ -68,10 +68,10 @@ impl Ship{
     pub fn check(&self, test : Cords) -> isize{
         for range in 0..5{
              if test.x == self.cordinates[range].x && test.y == self.cordinates[range].y {
-                return range as isize;
+                return range as isize;//return the index of the cords that match the given position
              }
         }
-        return -1
+        return -1//otherwise there is no ship at these cords and print the defualt
     }
     pub fn get_type_char(&self) -> char{
         match self.shiptype.as_ref(){
@@ -176,7 +176,7 @@ pub fn check_if_dir_valid(dir : &char) -> bool{
         'S' => return true,
         'E' => return true,
         'W' => return true,
-         _ => return {println!("Invalid char: {}", dir); 
+         _ => {println!("Invalid char: {}", dir); 
             return false},
     };
 }
@@ -197,6 +197,7 @@ pub fn check_if_y_is_valid(x : &usize) -> bool{
 }
 pub fn convert_int_to_char(input : usize) -> char{
     match input{
+        0 => return 'T',
         1 => return 'A',
         2 => return 'B',
         3 => return 'C',
@@ -207,6 +208,7 @@ pub fn convert_int_to_char(input : usize) -> char{
         8 => return 'H',
         9 => return 'I',
         10 => return 'J',
+        11 => return 'W',
         _ => return 'Z'
     }
     
@@ -229,6 +231,7 @@ pub fn check_if_x_is_valid(x : &char) -> bool{
     }
 pub fn convert_char_to_int(x : &char) -> usize{
         match x{
+            'T' => return 0,
             'A' => return 1,
             'B' => return 2,
             'C' => return 3,
@@ -239,7 +242,8 @@ pub fn convert_char_to_int(x : &char) -> usize{
             'H' => return 8,
             'I' => return 9,
             'J' => return 10,
-            _ => return 11
+            'W' => return 11,
+            _ => return 20
         };
     }
 pub fn check_setup(dir: &char, x: &char, y: &usize, size: i8) -> bool{
