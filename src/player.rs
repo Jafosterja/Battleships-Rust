@@ -10,11 +10,11 @@ pub struct Player{
 
 }
 pub fn check_if_alive(player : Player) -> bool{
-    let mut result = true;
+    let mut result = false;
     for ships in 0..5{
         let test = player.myships[ships].clone();
         if test.check_if_dead() == false{
-            result = false;
+            result = true;
             return result;
         }
     }
@@ -67,4 +67,3 @@ impl Player{
         return self;
     }
 }
-
